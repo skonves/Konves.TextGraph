@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6828C636-FF2C-4BB7-A654-EC143CE10C50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konves.TextGraph", "src\Konves.TextGraph\Konves.TextGraph.csproj", "{D3BD3285-8F5B-4915-A4E5-ED0D63E32B04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konves.TextGraph.UnitTests", "tests\Konves.TextGraph.UnitTests\Konves.TextGraph.UnitTests.csproj", "{A2908650-A018-4EA2-8913-20358E313BE9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3BD3285-8F5B-4915-A4E5-ED0D63E32B04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3BD3285-8F5B-4915-A4E5-ED0D63E32B04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3BD3285-8F5B-4915-A4E5-ED0D63E32B04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3BD3285-8F5B-4915-A4E5-ED0D63E32B04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2908650-A018-4EA2-8913-20358E313BE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2908650-A018-4EA2-8913-20358E313BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2908650-A018-4EA2-8913-20358E313BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2908650-A018-4EA2-8913-20358E313BE9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A2908650-A018-4EA2-8913-20358E313BE9} = {6828C636-FF2C-4BB7-A654-EC143CE10C50}
+	EndGlobalSection
+EndGlobal
