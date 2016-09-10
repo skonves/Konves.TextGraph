@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D3BD3285-8F5B-4915-A4E5-ED0D63E32B04}</ProjectGuid>
+    <ProjectGuid>{9C16626D-14FC-4467-AD35-379B6C8A4BD5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Konves.TextGraph</RootNamespace>
-    <AssemblyName>Konves.TextGraph</AssemblyName>
+    <RootNamespace>Konves.TextGraph.HtmlParser</RootNamespace>
+    <AssemblyName>Konves.TextGraph.HtmlParser</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,15 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Annotations\Heading.cs" />
-    <Compile Include="Annotations\Paragraph.cs" />
-    <Compile Include="DataGenerator.cs" />
-    <Compile Include="Annotations\Emphasis.cs" />
-    <Compile Include="IDocumentExtender.cs" />
-    <Compile Include="IDocumentParser.cs" />
-    <Compile Include="Models\Annotation.cs" />
-    <Compile Include="Models\Document.cs" />
+    <Compile Include="HtmlDocumentParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Konves.TextGraph\Konves.TextGraph.csproj">
+      <Project>{d3bd3285-8f5b-4915-a4e5-ed0d63e32b04}</Project>
+      <Name>Konves.TextGraph</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

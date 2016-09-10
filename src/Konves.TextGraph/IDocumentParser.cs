@@ -11,6 +11,6 @@ namespace Konves.TextGraph
 {
 	public interface IDocumentParser
 	{
-		Document Parse(Stream documentStream);
+		ReadOnlyCollection<Document> Parse(string id, Stream documentStream);
 	}
 }

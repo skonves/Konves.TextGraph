@@ -72,6 +72,41 @@ namespace Konves.TextGraph.UnitTests
 			new TestAnnotation(5, -1);
 		}
 
+		[TestCategory("Annotation.Equals")]
+		[TestMethod]
+		public void TestEquals()
+		{
+			DoTestEquals(new TestAnnotation(5, 7), new TestAnnotation(5, 7), true);
+			DoTestEquals(new TestAnnotation(5, 3), new TestAnnotation(5, 7), false);
+			DoTestEquals(new TestAnnotation(5, 3), null, false);
+			DoTestEquals(new TestAnnotation(5, 7), new TestAnnotationB(5, 7), false);
+		}
+
+		private void DoTestEquals(Annotation a, Annotation b, bool expectedResult)
+		{
+			// Arrange
+
+			// Act
+			bool result = a.Equals(b);
+
+			// Assert
+			Assert.AreEqual(expectedResult, result);
+		}
+
+		[TestCategory("Annotation.GetHAshCode")]
+		[TestMethod]
+		public void TestGetHashCode()
+		{
+			// Arrange
+			Annotation sut = new TestAnnotation(5, 7);
+
+			// Act
+			int result = sut.GetHashCode();
+
+			// Assert
+			Assert.AreNotEqual(0, result);
+		}
+
 		private void TestIntersects(int offset1, int length1, int offset2, int length2, bool expectedResult)
 		{
 			// Arrange
@@ -116,7 +151,7 @@ namespace Konves.TextGraph.UnitTests
 			{
 				get
 				{
-					throw new NotImplementedException();
+					return "Subtype";
 				}
 			}
 
@@ -124,7 +159,28 @@ namespace Konves.TextGraph.UnitTests
 			{
 				get
 				{
-					throw new NotImplementedException();
+					return "Type";
+				}
+			}
+		}
+
+		private class TestAnnotationB : Annotation
+		{
+			public TestAnnotationB(int offset, int length) : base(offset, length) { }
+
+			public override string Subtype
+			{
+				get
+				{
+					return "Subtype";
+				}
+			}
+
+			public override string Type
+			{
+				get
+				{
+					return "TypeB";
 				}
 			}
 		}
