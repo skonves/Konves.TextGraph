@@ -27,12 +27,6 @@ namespace Konves.TextGraph.HtmlParser
 			return new ReadOnlyCollection<Document>(new[] { document });
 		}
 
-		private void ParseNode(string id, HtmlNode node)
-		{
-			var state = new ParseState(id);
-			state.Traverse(node);
-		}
-
 		private class ParseState
 		{
 			public ParseState(string documentId)
