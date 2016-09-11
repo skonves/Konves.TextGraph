@@ -48,7 +48,7 @@ namespace Konves.TextGraph.HtmlParser
 				{
 					case "a":
 						Traverse(node.ChildNodes);
-						_annotations.Add(new Link(_documentId, offset, _text.Length - offset, node.Attributes["href"].Value));
+						_annotations.Add(new Link(_documentId, offset, _text.Length - offset, node.Attributes["href"]?.Value));
 						break;
 					case "#text":
 						AddText(node.InnerText);
