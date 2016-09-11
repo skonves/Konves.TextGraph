@@ -54,11 +54,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Konves.TextGraph.MarkDownParser\Konves.TextGraph.MarkdownParser.csproj">
+    <ProjectReference Include="..\..\src\Konves.TextGraph.MarkDownParser\Konves.TextGraph.MarkdownParser.csproj">
       <Project>{b99ef01a-7bb7-45f7-8e97-2fbe7bd9ad09}</Project>
       <Name>Konves.TextGraph.MarkdownParser</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Konves.TextGraph\Konves.TextGraph.csproj">
+    <ProjectReference Include="..\..\src\Konves.TextGraph\Konves.TextGraph.csproj">
       <Project>{d3bd3285-8f5b-4915-a4e5-ed0d63e32b04}</Project>
       <Name>Konves.TextGraph</Name>
     </ProjectReference>

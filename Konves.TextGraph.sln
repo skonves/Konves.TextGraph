@@ -17,11 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{2A9FD522
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konves.TextGraph.MarkdownParser", "src\Konves.TextGraph.MarkDownParser\Konves.TextGraph.MarkdownParser.csproj", "{B99EF01A-7BB7-45F7-8E97-2FBE7BD9AD09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konves.TextGraph.MarkdownParser.UnitTests", "src\Konves.TextGraph.MarkdownParser.UnitTests\Konves.TextGraph.MarkdownParser.UnitTests.csproj", "{BFC11C50-368D-46BC-987E-4248ACA6377F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konves.TextGraph.HtmlParser", "src\Konves.TextGraph.HtmlParser\Konves.TextGraph.HtmlParser.csproj", "{9C16626D-14FC-4467-AD35-379B6C8A4BD5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konves.TextGraph.HtmlParser.UnitTests", "tests\Konves.TextGraph.HtmlParser.UnitTests\Konves.TextGraph.HtmlParser.UnitTests.csproj", "{0F3BC996-801D-4E8C-A60A-710E2ABC958C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Konves.TextGraph.MarkdownParser.UnitTests", "tests\Konves.TextGraph.MarkdownParser.UnitTests\Konves.TextGraph.MarkdownParser.UnitTests.csproj", "{BFC11C50-368D-46BC-987E-4248ACA6377F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,6 @@ Global
 		{B99EF01A-7BB7-45F7-8E97-2FBE7BD9AD09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B99EF01A-7BB7-45F7-8E97-2FBE7BD9AD09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B99EF01A-7BB7-45F7-8E97-2FBE7BD9AD09}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BFC11C50-368D-46BC-987E-4248ACA6377F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFC11C50-368D-46BC-987E-4248ACA6377F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BFC11C50-368D-46BC-987E-4248ACA6377F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BFC11C50-368D-46BC-987E-4248ACA6377F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9C16626D-14FC-4467-AD35-379B6C8A4BD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9C16626D-14FC-4467-AD35-379B6C8A4BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C16626D-14FC-4467-AD35-379B6C8A4BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,13 +49,17 @@ Global
 		{0F3BC996-801D-4E8C-A60A-710E2ABC958C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F3BC996-801D-4E8C-A60A-710E2ABC958C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F3BC996-801D-4E8C-A60A-710E2ABC958C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFC11C50-368D-46BC-987E-4248ACA6377F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC11C50-368D-46BC-987E-4248ACA6377F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFC11C50-368D-46BC-987E-4248ACA6377F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFC11C50-368D-46BC-987E-4248ACA6377F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A2908650-A018-4EA2-8913-20358E313BE9} = {6828C636-FF2C-4BB7-A654-EC143CE10C50}
-		{BFC11C50-368D-46BC-987E-4248ACA6377F} = {6828C636-FF2C-4BB7-A654-EC143CE10C50}
 		{0F3BC996-801D-4E8C-A60A-710E2ABC958C} = {6828C636-FF2C-4BB7-A654-EC143CE10C50}
+		{BFC11C50-368D-46BC-987E-4248ACA6377F} = {6828C636-FF2C-4BB7-A654-EC143CE10C50}
 	EndGlobalSection
 EndGlobal
