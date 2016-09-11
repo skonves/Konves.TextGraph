@@ -16,95 +16,75 @@ namespace Konves.TextGraph.HtmlParser.UnitTests
 		[TestMethod]
 		public void ParseTest_Heading()
 		{
-			// Arrange
-			Stream stream = ToStream("<h2>header text</h2> <h2>header text</h2>");
-
-			string docId = "abc";
-			string expectedText = "header text header text";
-			List<Annotation> expectedAnnotations = new List<Annotation> { new Heading(docId, 0, 11, 2), new Heading(docId, 12, 11, 2) };
-
-			HtmlDocumentParser sut = new HtmlDocumentParser();
-
-			// Act
-			var result = sut.Parse(docId, stream);
-
-			// Assert
-			AssertDocuemnt(result, expectedText, expectedAnnotations);
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: "<h2>header text</h2> <h2>header text</h2>",
+				expectedDocumentText: "header text header text",
+				expectedAnnotations: new List<Annotation> { new Heading("asdf", 0, 11, 2), new Heading("asdf", 12, 11, 2) });
 		}
 
 		[TestCategory(nameof(HtmlDocumentParser))]
 		[TestMethod]
 		public void ParseTest_Emphasis()
 		{
-			// Arrange
-			Stream stream = ToStream("<em>emphasized text</em>");
-
-			string docId = "abc";
-			string expectedText = "emphasized text";
-			List<Annotation> expectedAnnotations = new List<Annotation> { new Emphasis(docId, 0, 15) };
-
-			HtmlDocumentParser sut = new HtmlDocumentParser();
-
-			// Act
-			var result = sut.Parse(docId, stream);
-
-			// Assert
-			AssertDocuemnt(result, expectedText, expectedAnnotations);
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: "<em>emphasized text</em>",
+				expectedDocumentText: "emphasized text",
+				expectedAnnotations: new List<Annotation> { new Emphasis("asdf", 0, 15) });
 		}
 
 		[TestCategory(nameof(HtmlDocumentParser))]
 		[TestMethod]
 		public void ParseTest_Link()
 		{
-			// Arrange
-			string docId = "abc";
-			string expectedText = "link text";
-			string expectedUri = "http://example.com/path?query=value#hash";
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: "<a HrEf='http://example.com/path?query=value#hash'>link text</a>",
+				expectedDocumentText: "link text",
+				expectedAnnotations: new List<Annotation> { new Link("asdf", 0, 9, "http://example.com/path?query=value#hash") });
 
-			Stream stream = ToStream($"<a HrEf='{expectedUri}'>{expectedText}</a>");
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: "<a href=''>link text</a>",
+				expectedDocumentText: "link text",
+				expectedAnnotations: new List<Annotation> { new Link("asdf", 0, 9, string.Empty) });
 
-			List<Annotation> expectedAnnotations = new List<Annotation> { new Link(docId, 0, 9, expectedUri) };
-
-			HtmlDocumentParser sut = new HtmlDocumentParser();
-
-			// Act
-			var result = sut.Parse(docId, stream);
-
-			// Assert
-			AssertDocuemnt(result, expectedText, expectedAnnotations);
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: "<a>link text</a>",
+				expectedDocumentText: "link text",
+				expectedAnnotations: new List<Annotation> { new Link("asdf", 0, 9, null) });
 		}
 
 		[TestCategory(nameof(HtmlDocumentParser))]
 		[TestMethod]
 		public void ParseTest_Paragraph()
 		{
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: $@"<p>paragraph
+text</p>",
+				expectedDocumentText: "paragraph text",
+				expectedAnnotations: new List<Annotation> { new Paragraph("asdf", 0, 14) });
+		}
+
+		private void DoParseTest(string sourceDocumentId, string sourceDocumentText, string expectedDocumentText, IEnumerable<Annotation> expectedAnnotations)
+		{
 			// Arrange
-			string docId = "abc";
-			string expectedText = "paragraph text";
-
-			Stream stream = ToStream($@"<p>paragraph
-text</p>");
-
-			List<Annotation> expectedAnnotations = new List<Annotation> { new Paragraph(docId, 0, 14) };
-
+			Stream stream = ToStream(sourceDocumentText);
 			HtmlDocumentParser sut = new HtmlDocumentParser();
 
 			// Act
-			var result = sut.Parse(docId, stream);
+			var result = sut.Parse(sourceDocumentId, stream);
 
-			// Assert
-			AssertDocuemnt(result, expectedText, expectedAnnotations);
-		}
-
-		private void AssertDocuemnt(ICollection<Document> result, string expectedText, IEnumerable<Annotation> expectedAnnotations)
-		{
 			// Assert
 			Assert.IsNotNull(result);
-			Assert.AreEqual(1, result.Count());
+			Assert.AreEqual(1, result.Count);
 
 			Document document = result.Single();
 
-			Assert.AreEqual(expectedText, document.Text);
+			Assert.AreEqual(expectedDocumentText, document.Text);
 			CollectionAssert.AreEquivalent(expectedAnnotations.ToList(), document.Annotations);
 		}
 
