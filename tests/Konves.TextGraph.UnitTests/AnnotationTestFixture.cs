@@ -61,7 +61,7 @@ namespace Konves.TextGraph.UnitTests
 		[ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void TestOffsetOutOfRange()
 		{
-			new TestAnnotation(-1, 5);
+			new TestAnnotation("", -1, 5);
 		}
 
 		[TestCategory("Annotation.Ctor")]
@@ -69,17 +69,22 @@ namespace Konves.TextGraph.UnitTests
 		[ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void TestLengthOutOfRange()
 		{
-			new TestAnnotation(5, -1);
+			new TestAnnotation("", 5, -1);
 		}
 
 		[TestCategory("Annotation.Equals")]
 		[TestMethod]
 		public void TestEquals()
 		{
-			DoTestEquals(new TestAnnotation(5, 7), new TestAnnotation(5, 7), true);
-			DoTestEquals(new TestAnnotation(5, 3), new TestAnnotation(5, 7), false);
-			DoTestEquals(new TestAnnotation(5, 3), null, false);
-			DoTestEquals(new TestAnnotation(5, 7), new TestAnnotationB(5, 7), false);
+			DoTestEquals(new TestAnnotation("a", 5, 7), new TestAnnotation("a", 5, 7), true);
+			DoTestEquals(new TestAnnotation("a", 5, 3), new TestAnnotation("a", 5, 7), false);
+			DoTestEquals(new TestAnnotation("a", 5, 3), null, false);
+			DoTestEquals(new TestAnnotation("a", 5, 7), new TestAnnotationB("a", 5, 7), false);
+
+			DoTestEquals(new TestAnnotation("a", 5, 7), new TestAnnotation("b", 5, 7), false);
+			DoTestEquals(new TestAnnotation("a", 5, 3), new TestAnnotation("b", 5, 7), false);
+			DoTestEquals(new TestAnnotation("a", 5, 3), null, false);
+			DoTestEquals(new TestAnnotation("a", 5, 7), new TestAnnotationB("b", 5, 7), false);
 		}
 
 		private void DoTestEquals(Annotation a, Annotation b, bool expectedResult)
@@ -98,7 +103,7 @@ namespace Konves.TextGraph.UnitTests
 		public void TestGetHashCode()
 		{
 			// Arrange
-			Annotation sut = new TestAnnotation(5, 7);
+			Annotation sut = new TestAnnotation("asdf", 5, 7);
 
 			// Act
 			int result = sut.GetHashCode();
@@ -110,8 +115,8 @@ namespace Konves.TextGraph.UnitTests
 		private void TestIntersects(int offset1, int length1, int offset2, int length2, bool expectedResult)
 		{
 			// Arrange
-			Annotation a = new TestAnnotation(offset1, length1);
-			Annotation b = new TestAnnotation(offset2, length2);
+			Annotation a = new TestAnnotation("", offset1, length1);
+			Annotation b = new TestAnnotation("", offset2, length2);
 
 			// Act
 			bool result = a.Intersects(b);
@@ -123,8 +128,8 @@ namespace Konves.TextGraph.UnitTests
 		private void TestCompareTo(int offset1, int length1, int offset2, int length2, int exectedSign)
 		{
 			// Arrange
-			IComparable<Annotation> a = new TestAnnotation(offset1, length1);
-			Annotation b = new TestAnnotation(offset2, length2);
+			IComparable<Annotation> a = new TestAnnotation("", offset1, length1);
+			Annotation b = new TestAnnotation("", offset2, length2);
 
 			// Act
 			int result = a.CompareTo(b);
@@ -138,14 +143,14 @@ namespace Konves.TextGraph.UnitTests
 			// Arrange
 
 			// Act
-			Annotation a = new TestAnnotation(offset, length);
+			Annotation a = new TestAnnotation(string.Empty, offset, length);
 
 			// Assert
 		}
 
 		private class TestAnnotation : Annotation
 		{
-			public TestAnnotation(int offset, int length) : base(offset, length) { }
+			public TestAnnotation(string documentId, int offset, int length) : base(documentId, offset, length) { }
 
 			public override string Subtype
 			{
@@ -166,7 +171,7 @@ namespace Konves.TextGraph.UnitTests
 
 		private class TestAnnotationB : Annotation
 		{
-			public TestAnnotationB(int offset, int length) : base(offset, length) { }
+			public TestAnnotationB(string documentId, int offset, int length) : base(documentId, offset, length) { }
 
 			public override string Subtype
 			{

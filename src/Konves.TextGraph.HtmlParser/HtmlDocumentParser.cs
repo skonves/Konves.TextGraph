@@ -48,18 +48,18 @@ namespace Konves.TextGraph.HtmlParser
 				{
 					case "a":
 						Traverse(node.ChildNodes);
-						_annotations.Add(new Link(offset, _text.Length - offset, node.Attributes["href"].Value));
+						_annotations.Add(new Link(_documentId, offset, _text.Length - offset, node.Attributes["href"].Value));
 						break;
 					case "#text":
 						AddText(node.InnerText);
 						break;
 					case "em":						
 						Traverse(node.ChildNodes);
-						_annotations.Add(new Emphasis(offset, _text.Length - offset));
+						_annotations.Add(new Emphasis(_documentId, offset, _text.Length - offset));
 						break;
 					case "p":
 						Traverse(node.ChildNodes);
-						_annotations.Add(new Paragraph(offset, _text.Length - offset));
+						_annotations.Add(new Paragraph(_documentId, offset, _text.Length - offset));
 						break;
 					case "h1":
 					case "h2":
@@ -68,7 +68,7 @@ namespace Konves.TextGraph.HtmlParser
 					case "h5":
 					case "h6":
 						Traverse(node.ChildNodes);
-						_annotations.Add(new Heading(offset, _text.Length - offset, int.Parse(node.Name.Substring(1,1))));
+						_annotations.Add(new Heading(_documentId, offset, _text.Length - offset, int.Parse(node.Name.Substring(1,1))));
 						break;
 					default:
 						Traverse(node.ChildNodes);

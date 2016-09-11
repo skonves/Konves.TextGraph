@@ -21,7 +21,7 @@ namespace Konves.TextGraph.HtmlParser.UnitTests
 
 			string docId = "abc";
 			string expectedText = "header text header text";
-			List<Annotation> expectedAnnotations = new List<Annotation> { new Heading(0, 11, 2), new Heading(12, 11, 2) };
+			List<Annotation> expectedAnnotations = new List<Annotation> { new Heading(docId, 0, 11, 2), new Heading(docId, 12, 11, 2) };
 
 			HtmlDocumentParser sut = new HtmlDocumentParser();
 
@@ -41,7 +41,7 @@ namespace Konves.TextGraph.HtmlParser.UnitTests
 
 			string docId = "abc";
 			string expectedText = "emphasized text";
-			List<Annotation> expectedAnnotations = new List<Annotation> { new Emphasis(0, 15) };
+			List<Annotation> expectedAnnotations = new List<Annotation> { new Emphasis(docId, 0, 15) };
 
 			HtmlDocumentParser sut = new HtmlDocumentParser();
 
@@ -63,7 +63,7 @@ namespace Konves.TextGraph.HtmlParser.UnitTests
 
 			Stream stream = ToStream($"<a HrEf='{expectedUri}'>{expectedText}</a>");
 
-			List<Annotation> expectedAnnotations = new List<Annotation> { new Link(0, 9, expectedUri) };
+			List<Annotation> expectedAnnotations = new List<Annotation> { new Link(docId, 0, 9, expectedUri) };
 
 			HtmlDocumentParser sut = new HtmlDocumentParser();
 
@@ -85,7 +85,7 @@ namespace Konves.TextGraph.HtmlParser.UnitTests
 			Stream stream = ToStream($@"<p>paragraph
 text</p>");
 
-			List<Annotation> expectedAnnotations = new List<Annotation> { new Paragraph(0, 14) };
+			List<Annotation> expectedAnnotations = new List<Annotation> { new Paragraph(docId, 0, 14) };
 
 			HtmlDocumentParser sut = new HtmlDocumentParser();
 

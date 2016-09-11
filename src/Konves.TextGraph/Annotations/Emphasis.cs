@@ -9,7 +9,7 @@ namespace Konves.TextGraph.Annotations
 {
 	public sealed class Emphasis : Annotation
 	{
-		public Emphasis(int offset, int length) : base(offset, length)
+		public Emphasis(string documentId, int offset, int length) : base(documentId, offset, length)
 		{
 		}
 
