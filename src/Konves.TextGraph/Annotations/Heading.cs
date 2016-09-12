@@ -4,7 +4,7 @@ namespace Konves.TextGraph.Annotations
 {
 	public sealed class Heading : Annotation
 	{
-		public Heading(string documentId, int offset, int length, int level) : base(documentId, offset, length)
+		public Heading(int offset, int length, int level) : base(offset, length)
 		{
 			Level = level;
 		}

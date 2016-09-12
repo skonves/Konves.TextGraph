@@ -4,7 +4,7 @@ namespace Konves.TextGraph.Annotations
 {
 	public sealed class Link : Annotation
 	{
-		public Link(string documentId, int offset, int length, string uri) : base(documentId, offset, length)
+		public Link(int offset, int length, string uri) : base(offset, length)
 		{
 			Uri = uri;
 		}

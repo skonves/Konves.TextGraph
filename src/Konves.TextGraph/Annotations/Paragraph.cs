@@ -9,7 +9,7 @@ namespace Konves.TextGraph.Annotations
 {
 	public sealed class Paragraph : Annotation
 	{
-		public Paragraph(string documentId, int offset, int length) : base(documentId, offset, length)
+		public Paragraph(int offset, int length) : base(offset, length)
 		{
 		}
 
