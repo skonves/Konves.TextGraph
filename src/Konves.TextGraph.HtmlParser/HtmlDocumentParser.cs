@@ -59,6 +59,9 @@ namespace Konves.TextGraph.HtmlParser
 						Traverse(node.ChildNodes);
 						_annotations.Add(new Paragraph(offset, _text.Length - offset));
 						break;
+					case "br":
+						_annotations.Add(new LineBreak(offset));
+						break;
 					case "h1":
 					case "h2":
 					case "h3":

@@ -69,6 +69,17 @@ text</p>",
 				expectedAnnotations: new List<Annotation> { new Paragraph(0, 14) });
 		}
 
+		[TestCategory(nameof(HtmlDocumentParser))]
+		[TestMethod]
+		public void ParseTest_LineBreak()
+		{
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: "some text<br /> more text",
+				expectedDocumentText: "some text more text",
+				expectedAnnotations: new List<Annotation> { new LineBreak(9) });
+		}
+
 		private void DoParseTest(string sourceDocumentId, string sourceDocumentText, string expectedDocumentText, IEnumerable<Annotation> expectedAnnotations)
 		{
 			// Arrange
