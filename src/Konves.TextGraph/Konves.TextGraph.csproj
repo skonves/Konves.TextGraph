@@ -45,7 +45,6 @@
     <Compile Include="Annotations\LineBreak.cs" />
     <Compile Include="Annotations\Link.cs" />
     <Compile Include="Annotations\Paragraph.cs" />
-    <Compile Include="DataGenerator.cs" />
     <Compile Include="Annotations\Emphasis.cs" />
     <Compile Include="IDocumentExtender.cs" />
     <Compile Include="Models\Annotation.cs" />

@@ -101,6 +101,7 @@ text</p>",
 			Document result = sut.Parse(sourceDocumentId, stream);
 
 			// Assert
+			Assert.AreEqual(sourceDocumentId, result.Id);
 			Assert.AreEqual(expectedDocumentText, result.Text);
 			CollectionAssert.AreEquivalent(expectedAnnotations.ToList(), result.Annotations);
 		}
