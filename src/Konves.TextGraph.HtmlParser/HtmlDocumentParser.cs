@@ -11,20 +11,18 @@ using Konves.TextGraph.Annotations;
 
 namespace Konves.TextGraph.HtmlParser
 {
-	public class HtmlDocumentParser : IDocumentParser
+	public class HtmlDocumentParser
 	{
-		public ReadOnlyCollection<Document> Parse(string id, Stream documentStream)
+		public Document Parse(string id, Stream htmlDocumentStream)
 		{
 			HtmlDocument htmlDocument = new HtmlDocument();
 
-			htmlDocument.Load(documentStream);
+			htmlDocument.Load(htmlDocumentStream);
 
 			ParseState state = new ParseState(id);
 			state.Traverse(htmlDocument.DocumentNode);
 
-			Document document = state.ToDocument();
-
-			return new ReadOnlyCollection<Document>(new[] { document });
+			return state.ToDocument();
 		}
 
 		private class ParseState

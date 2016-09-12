@@ -76,16 +76,11 @@ text</p>",
 			HtmlDocumentParser sut = new HtmlDocumentParser();
 
 			// Act
-			var result = sut.Parse(sourceDocumentId, stream);
+			Document result = sut.Parse(sourceDocumentId, stream);
 
 			// Assert
-			Assert.IsNotNull(result);
-			Assert.AreEqual(1, result.Count);
-
-			Document document = result.Single();
-
-			Assert.AreEqual(expectedDocumentText, document.Text);
-			CollectionAssert.AreEquivalent(expectedAnnotations.ToList(), document.Annotations);
+			Assert.AreEqual(expectedDocumentText, result.Text);
+			CollectionAssert.AreEquivalent(expectedAnnotations.ToList(), result.Annotations);
 		}
 
 		private static Stream ToStream(string s)

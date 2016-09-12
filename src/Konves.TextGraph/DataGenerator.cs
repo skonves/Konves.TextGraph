@@ -8,7 +8,7 @@ namespace Konves.TextGraph
 {
 	public sealed class DataGenerator
 	{
-		public DataGenerator(IEnumerable<IDocumentParser> documentParsers, IEnumerable<IDocumentExtender> documentExtenders)
+		public DataGenerator(IEnumerable<IDocumentExtender> documentExtenders)
 		{
 
 		}

@@ -11,9 +11,9 @@ using System.Collections.ObjectModel;
 
 namespace Konves.TextGraph.MarkDownParser
 {
-	public class MarkdownDocumentParser : IDocumentParser
+	public class MarkdownDocumentParser
 	{
-		public ReadOnlyCollection<Document> Parse(string id, Stream documentStream)
+		public Document Parse(string id, Stream documentStream)
 		{
 			using (StreamReader reader = new StreamReader(documentStream))
 			using (MemoryStream htmlStream = new MemoryStream())

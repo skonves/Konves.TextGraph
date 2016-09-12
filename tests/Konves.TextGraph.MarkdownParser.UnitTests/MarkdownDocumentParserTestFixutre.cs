@@ -36,7 +36,7 @@ some code
 			MarkdownDocumentParser sut = new MarkdownDocumentParser();
 
 			// Act
-			ReadOnlyCollection<Document> result = sut.Parse("asdf", stream);
+			Document result = sut.Parse("asdf", stream);
 
 			// Assert
 

@@ -46,7 +46,6 @@
     <Compile Include="DataGenerator.cs" />
     <Compile Include="Annotations\Emphasis.cs" />
     <Compile Include="IDocumentExtender.cs" />
-    <Compile Include="IDocumentParser.cs" />
     <Compile Include="Models\Annotation.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
