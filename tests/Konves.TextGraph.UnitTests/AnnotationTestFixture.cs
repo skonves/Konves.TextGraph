@@ -107,6 +107,20 @@ namespace Konves.TextGraph.UnitTests
 			Assert.AreNotEqual(0, result);
 		}
 
+		[TestCategory("Annotation.GetHAshCode")]
+		[TestMethod]
+		public void TestGetHashCode_Base()
+		{
+			// Arrange
+			TestAnnotationForHashCodes sut = new TestAnnotationForHashCodes();
+
+			// Act
+			int result = sut.PublicGetHashCode(null);
+
+			// Assert
+			Assert.AreEqual(0, result);
+		}
+
 		private void TestIntersects(int offset1, int length1, int offset2, int length2, bool expectedResult)
 		{
 			// Arrange
@@ -181,6 +195,34 @@ namespace Konves.TextGraph.UnitTests
 				get
 				{
 					return "TypeB";
+				}
+			}
+		}
+
+		private class TestAnnotationForHashCodes : Annotation
+		{
+			public TestAnnotationForHashCodes() : base(0, 0)
+			{
+			}
+
+			public int PublicGetHashCode(params object[] fields)
+			{
+				return GetHashCode(fields);
+			}
+
+			public override string Subtype
+			{
+				get
+				{
+					throw new NotImplementedException();
+				}
+			}
+
+			public override string Type
+			{
+				get
+				{
+					throw new NotImplementedException();
 				}
 			}
 		}

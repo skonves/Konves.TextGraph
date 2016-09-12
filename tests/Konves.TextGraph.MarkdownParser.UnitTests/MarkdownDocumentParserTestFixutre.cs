@@ -19,6 +19,9 @@ namespace Konves.TextGraph.MarkdownParser.UnitTests
 
 Some body text with *bold stuff* in it
 
+> Block quote
+> of some text
+> that is quoted
 
 ```
 some code
