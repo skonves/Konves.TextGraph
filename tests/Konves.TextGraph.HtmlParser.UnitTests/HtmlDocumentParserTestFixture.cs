@@ -80,6 +80,17 @@ text</p>",
 				expectedAnnotations: new List<Annotation> { new LineBreak(9) });
 		}
 
+		[TestCategory(nameof(HtmlDocumentParser))]
+		[TestMethod]
+		public void ParseTest_BlockQuote()
+		{
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: "<blockquote>some block quoted text</blockquote>",
+				expectedDocumentText: "some block quoted text",
+				expectedAnnotations: new List<Annotation> { new BlockQuote(0, 22) });
+		}
+
 		private void DoParseTest(string sourceDocumentId, string sourceDocumentText, string expectedDocumentText, IEnumerable<Annotation> expectedAnnotations)
 		{
 			// Arrange
