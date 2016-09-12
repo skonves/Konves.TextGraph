@@ -91,6 +91,28 @@ text</p>",
 				expectedAnnotations: new List<Annotation> { new BlockQuote(0, 22) });
 		}
 
+		[TestCategory(nameof(HtmlDocumentParser))]
+		[TestMethod]
+		public void ParseTest_OrderedList()
+		{
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: "<ol><li>item one</li> <li>item two</li></ol>",
+				expectedDocumentText: "item one item two",
+				expectedAnnotations: new List<Annotation> { new ListItem(0, 8), new ListItem(9, 8), new List(0, 17, true) });
+		}
+
+		[TestCategory(nameof(HtmlDocumentParser))]
+		[TestMethod]
+		public void ParseTest_UnorderedList()
+		{
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: "<ul><li>item one</li> <li>item two</li></ul>",
+				expectedDocumentText: "item one item two",
+				expectedAnnotations: new List<Annotation> { new ListItem(0, 8), new ListItem(9, 8), new List(0, 17, false) });
+		}
+
 		private void DoParseTest(string sourceDocumentId, string sourceDocumentText, string expectedDocumentText, IEnumerable<Annotation> expectedAnnotations)
 		{
 			// Arrange

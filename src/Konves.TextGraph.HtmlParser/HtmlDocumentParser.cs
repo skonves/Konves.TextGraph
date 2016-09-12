@@ -51,7 +51,7 @@ namespace Konves.TextGraph.HtmlParser
 					case "#text":
 						AddText(node.InnerText);
 						break;
-					case "em":						
+					case "em":
 						Traverse(node.ChildNodes);
 						_annotations.Add(new Emphasis(offset, _text.Length - offset));
 						break;
@@ -66,6 +66,18 @@ namespace Konves.TextGraph.HtmlParser
 						Traverse(node.ChildNodes);
 						_annotations.Add(new BlockQuote(offset, _text.Length - offset));
 						break;
+					case "ul":
+						Traverse(node.ChildNodes);
+						_annotations.Add(new List(offset, _text.Length - offset, isOrdered: false));
+						break;
+					case "ol":
+						Traverse(node.ChildNodes);
+						_annotations.Add(new List(offset, _text.Length - offset, isOrdered: true));
+						break;
+					case "li":
+						Traverse(node.ChildNodes);
+						_annotations.Add(new ListItem(offset, _text.Length - offset));
+						break;
 					case "h1":
 					case "h2":
 					case "h3":
@@ -73,7 +85,7 @@ namespace Konves.TextGraph.HtmlParser
 					case "h5":
 					case "h6":
 						Traverse(node.ChildNodes);
-						_annotations.Add(new Heading(offset, _text.Length - offset, int.Parse(node.Name.Substring(1,1))));
+						_annotations.Add(new Heading(offset, _text.Length - offset, int.Parse(node.Name.Substring(1, 1))));
 						break;
 					default:
 						Traverse(node.ChildNodes);

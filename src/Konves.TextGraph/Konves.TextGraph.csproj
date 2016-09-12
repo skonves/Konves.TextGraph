@@ -44,6 +44,8 @@
     <Compile Include="Annotations\Heading.cs" />
     <Compile Include="Annotations\LineBreak.cs" />
     <Compile Include="Annotations\Link.cs" />
+    <Compile Include="Annotations\List.cs" />
+    <Compile Include="Annotations\ListItem.cs" />
     <Compile Include="Annotations\Paragraph.cs" />
     <Compile Include="Annotations\Emphasis.cs" />
     <Compile Include="IDocumentExtender.cs" />
