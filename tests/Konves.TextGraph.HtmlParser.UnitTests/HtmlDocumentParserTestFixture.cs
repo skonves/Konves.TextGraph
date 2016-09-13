@@ -15,6 +15,17 @@ namespace Konves.TextGraph.HtmlParser.UnitTests
 	{
 		[TestCategory(nameof(HtmlDocumentParser))]
 		[TestMethod]
+		public void ParseTest_Entities()
+		{
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: "some &amp; text &lt;br/&gt;",
+				expectedDocumentText: "some & text <br/>",
+				expectedAnnotations: new List<Annotation> { });
+		}
+
+		[TestCategory(nameof(HtmlDocumentParser))]
+		[TestMethod]
 		public void ParseTest_Heading()
 		{
 			DoParseTest(

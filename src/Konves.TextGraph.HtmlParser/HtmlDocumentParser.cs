@@ -106,8 +106,10 @@ namespace Konves.TextGraph.HtmlParser
 				return new Document(_documentId, _text.ToString(), _annotations);
 			}
 
-			internal void AddText(string s)
+			internal void AddText(string text)
 			{
+				string s = HtmlEntity.DeEntitize(text);
+
 				for (int i = 0; i < s.Length; i++)
 				{
 					if (char.IsWhiteSpace(s[i]))
