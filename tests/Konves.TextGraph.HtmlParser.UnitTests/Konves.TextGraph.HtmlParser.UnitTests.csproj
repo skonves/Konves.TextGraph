@@ -62,6 +62,10 @@
       <Project>{d3bd3285-8f5b-4915-a4e5-ed0d63e32b04}</Project>
       <Name>Konves.TextGraph</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Konves.TextGraph.UnitTests\Konves.TextGraph.UnitTests.csproj">
+      <Project>{a2908650-a018-4ea2-8913-20358e313be9}</Project>
+      <Name>Konves.TextGraph.UnitTests</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

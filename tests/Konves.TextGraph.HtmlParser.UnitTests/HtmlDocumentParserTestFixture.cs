@@ -6,6 +6,7 @@ using System.Linq;
 using Konves.TextGraph.Annotations;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Konves.TextGraph.UnitTests;
 
 namespace Konves.TextGraph.HtmlParser.UnitTests
 {
@@ -18,7 +19,7 @@ namespace Konves.TextGraph.HtmlParser.UnitTests
 		{
 			DoParseTest(
 				sourceDocumentId: "asdf",
-				sourceDocumentText: "<h2>header text</h2> <h2>header text</h2>",
+				sourceDocumentText: " <h2> header  text </h2> <h2> header  text </h2> ",
 				expectedDocumentText: "header text header text",
 				expectedAnnotations: new List<Annotation> { new Heading(0, 11, 2), new Heading(12, 11, 2) });
 		}
@@ -29,7 +30,7 @@ namespace Konves.TextGraph.HtmlParser.UnitTests
 		{
 			DoParseTest(
 				sourceDocumentId: "asdf",
-				sourceDocumentText: "<em>emphasized text</em>",
+				sourceDocumentText: " <em> emphasized  text </em> ",
 				expectedDocumentText: "emphasized text",
 				expectedAnnotations: new List<Annotation> { new Emphasis(0, 15) });
 		}
@@ -40,19 +41,19 @@ namespace Konves.TextGraph.HtmlParser.UnitTests
 		{
 			DoParseTest(
 				sourceDocumentId: "asdf",
-				sourceDocumentText: "<a HrEf='http://example.com/path?query=value#hash'>link text</a>",
+				sourceDocumentText: " <a HrEf='http://example.com/path?query=value#hash'> link  text </a> ",
 				expectedDocumentText: "link text",
 				expectedAnnotations: new List<Annotation> { new Link(0, 9, "http://example.com/path?query=value#hash") });
 
 			DoParseTest(
 				sourceDocumentId: "asdf",
-				sourceDocumentText: "<a href=''>link text</a>",
+				sourceDocumentText: " <a href=''> link  text </a> ",
 				expectedDocumentText: "link text",
 				expectedAnnotations: new List<Annotation> { new Link(0, 9, string.Empty) });
 
 			DoParseTest(
 				sourceDocumentId: "asdf",
-				sourceDocumentText: "<a>link text</a>",
+				sourceDocumentText: " <a> link  text </a> ",
 				expectedDocumentText: "link text",
 				expectedAnnotations: new List<Annotation> { new Link(0, 9, null) });
 		}
@@ -63,8 +64,8 @@ namespace Konves.TextGraph.HtmlParser.UnitTests
 		{
 			DoParseTest(
 				sourceDocumentId: "asdf",
-				sourceDocumentText: $@"<p>paragraph
-text</p>",
+				sourceDocumentText: @" <p> paragraph
+text </p> ",
 				expectedDocumentText: "paragraph text",
 				expectedAnnotations: new List<Annotation> { new Paragraph(0, 14) });
 		}
@@ -75,7 +76,7 @@ text</p>",
 		{
 			DoParseTest(
 				sourceDocumentId: "asdf",
-				sourceDocumentText: "some text<br /> more text",
+				sourceDocumentText: " some text <br /> more text ",
 				expectedDocumentText: "some text more text",
 				expectedAnnotations: new List<Annotation> { new LineBreak(9) });
 		}
@@ -86,9 +87,9 @@ text</p>",
 		{
 			DoParseTest(
 				sourceDocumentId: "asdf",
-				sourceDocumentText: "<blockquote>some block quoted text</blockquote>",
-				expectedDocumentText: "some block quoted text",
-				expectedAnnotations: new List<Annotation> { new BlockQuote(0, 22) });
+				sourceDocumentText: " <blockquote> ab </blockquote> <blockquote>  cd  </blockquote>  ",
+				expectedDocumentText: "ab cd",
+				expectedAnnotations: new List<Annotation> { new BlockQuote(0, 2), new BlockQuote(3, 2) });
 		}
 
 		[TestCategory(nameof(HtmlDocumentParser))]
@@ -97,7 +98,23 @@ text</p>",
 		{
 			DoParseTest(
 				sourceDocumentId: "asdf",
-				sourceDocumentText: "<ol><li>item one</li> <li>item two</li></ol>",
+				sourceDocumentText: @"
+<ol>
+	<li>item one</li>
+	<li>item two</li>
+</ol>",
+				expectedDocumentText: "item one item two",
+				expectedAnnotations: new List<Annotation> { new ListItem(0, 8), new ListItem(9, 8), new List(0, 17, true) });
+
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: "<ol><li>item one</li><li>item two</li></ol>",
+				expectedDocumentText: "item oneitem two",
+				expectedAnnotations: new List<Annotation> { new ListItem(0, 8), new ListItem(8, 8), new List(0, 16, true) });
+
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: " <ol> <li> item  one </li> <li> item  two </li> </ol> ",
 				expectedDocumentText: "item one item two",
 				expectedAnnotations: new List<Annotation> { new ListItem(0, 8), new ListItem(9, 8), new List(0, 17, true) });
 		}
@@ -108,7 +125,23 @@ text</p>",
 		{
 			DoParseTest(
 				sourceDocumentId: "asdf",
-				sourceDocumentText: "<ul><li>item one</li> <li>item two</li></ul>",
+				sourceDocumentText: @"
+<ul>
+	<li>item one</li>
+	<li>item two</li>
+</ul>",
+				expectedDocumentText: "item one item two",
+				expectedAnnotations: new List<Annotation> { new ListItem(0, 8), new ListItem(9, 8), new List(0, 17, false) });
+
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: "<ul><li>item one</li><li>item two</li></ul>",
+				expectedDocumentText: "item oneitem two",
+				expectedAnnotations: new List<Annotation> { new ListItem(0, 8), new ListItem(8, 8), new List(0, 16, false) });
+
+			DoParseTest(
+				sourceDocumentId: "asdf",
+				sourceDocumentText: " <ul> <li> item  one </li> <li> item  two </li> </ul> ",
 				expectedDocumentText: "item one item two",
 				expectedAnnotations: new List<Annotation> { new ListItem(0, 8), new ListItem(9, 8), new List(0, 17, false) });
 		}
@@ -123,6 +156,8 @@ text</p>",
 			Document result = sut.Parse(sourceDocumentId, stream);
 
 			// Assert
+			new DocumentValidator().Run(result);
+
 			Assert.AreEqual(sourceDocumentId, result.Id);
 			Assert.AreEqual(expectedDocumentText, result.Text);
 			CollectionAssert.AreEquivalent(expectedAnnotations.ToList(), result.Annotations);

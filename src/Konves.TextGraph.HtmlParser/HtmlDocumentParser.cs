@@ -46,6 +46,7 @@ namespace Konves.TextGraph.HtmlParser
 				{
 					case "a":
 						Traverse(node.ChildNodes);
+						offset = char.IsWhiteSpace(_text[offset]) ? offset + 1 : offset;
 						_annotations.Add(new Link(offset, _text.Length - offset, node.Attributes["href"]?.Value));
 						break;
 					case "#text":
@@ -53,10 +54,12 @@ namespace Konves.TextGraph.HtmlParser
 						break;
 					case "em":
 						Traverse(node.ChildNodes);
+						offset = char.IsWhiteSpace(_text[offset]) ? offset + 1 : offset;
 						_annotations.Add(new Emphasis(offset, _text.Length - offset));
 						break;
 					case "p":
 						Traverse(node.ChildNodes);
+						offset = char.IsWhiteSpace(_text[offset]) ? offset + 1 : offset;
 						_annotations.Add(new Paragraph(offset, _text.Length - offset));
 						break;
 					case "br":
@@ -64,18 +67,22 @@ namespace Konves.TextGraph.HtmlParser
 						break;
 					case "blockquote":
 						Traverse(node.ChildNodes);
+						offset = char.IsWhiteSpace(_text[offset]) ? offset + 1 : offset;
 						_annotations.Add(new BlockQuote(offset, _text.Length - offset));
 						break;
 					case "ul":
 						Traverse(node.ChildNodes);
+						offset = char.IsWhiteSpace(_text[offset]) ? offset + 1 : offset;
 						_annotations.Add(new List(offset, _text.Length - offset, isOrdered: false));
 						break;
 					case "ol":
 						Traverse(node.ChildNodes);
+						offset = char.IsWhiteSpace(_text[offset]) ? offset + 1 : offset;
 						_annotations.Add(new List(offset, _text.Length - offset, isOrdered: true));
 						break;
 					case "li":
 						Traverse(node.ChildNodes);
+						offset = char.IsWhiteSpace(_text[offset]) ? offset + 1 : offset;
 						_annotations.Add(new ListItem(offset, _text.Length - offset));
 						break;
 					case "h1":
@@ -85,6 +92,7 @@ namespace Konves.TextGraph.HtmlParser
 					case "h5":
 					case "h6":
 						Traverse(node.ChildNodes);
+						offset = char.IsWhiteSpace(_text[offset]) ? offset + 1 : offset;
 						_annotations.Add(new Heading(offset, _text.Length - offset, int.Parse(node.Name.Substring(1, 1))));
 						break;
 					default:
@@ -104,22 +112,23 @@ namespace Konves.TextGraph.HtmlParser
 				{
 					if (char.IsWhiteSpace(s[i]))
 					{
-						if (!_previousCharIsWhitespace)
-						{
-							_text.Append(" ");
-						}
-
-						_previousCharIsWhitespace = true;
+						if (_text.Length > 0)
+							_isSpaceQueued = true;
 					}
 					else
 					{
-						_previousCharIsWhitespace = false;
+						if (_isSpaceQueued)
+						{
+							_text.Append((char)0x20);
+							_isSpaceQueued = false;
+						}
+
 						_text.Append(s[i]);
 					}
 				}
 			}
 
-			bool _previousCharIsWhitespace = false;
+			bool _isSpaceQueued = false;
 
 			StringBuilder _text = new StringBuilder();
 
